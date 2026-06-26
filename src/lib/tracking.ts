@@ -1,6 +1,6 @@
 import { calculateActivations } from './activationRules';
 import { calculateAudiences } from './audienceRules';
-import { defaultMeiroEndpointType, meiroEndpoints, type MeiroEndpointType } from './meiroConfig';
+import { defaultMeiroEndpointType, meiroCollectProxyPath, type MeiroEndpointType } from './meiroConfig';
 import { applyEvent, createInitialProfile } from './profileBuilder';
 import type { DemoEvent, DemoState, MeiroProfile, TrackingMode } from './types';
 
@@ -30,15 +30,9 @@ export function buildEvent(profile: MeiroProfile, eventType: string, screenName:
 }
 
 export function sendEventToMeiro(event: DemoEvent, endpointType: MeiroEndpointType = defaultMeiroEndpointType) {
-  const endpoint = meiroEndpoints[endpointType];
-  const body = JSON.stringify(event);
+  const body = JSON.stringify({ endpointType, event });
 
-  if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
-    const blob = new Blob([body], { type: 'application/json' });
-    if (navigator.sendBeacon(endpoint, blob)) return;
-  }
-
-  void fetch(endpoint, {
+  void fetch(meiroCollectProxyPath, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body,

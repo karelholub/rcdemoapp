@@ -1,7 +1,4 @@
-export const meiroEndpoints = {
-  mobileApp: 'https://riyad-capital.eu1.pipes.meiro.io/collect/mobile-app',
-  website: 'https://riyad-capital.eu1.pipes.meiro.io/collect/website',
-} as const;
+export const meiroCollectProxyPath = '/api/meiro-collect';
 
 export const meiroProfileApi = {
   baseUrl: 'https://riyad-capital.eu1.pipes.meiro.io',
@@ -13,6 +10,6 @@ export const meiroIdentifierTypes = ['email', 'phone', 'crm_customer_id', 'user_
 
 export type MeiroIdentifierType = (typeof meiroIdentifierTypes)[number];
 
-export type MeiroEndpointType = keyof typeof meiroEndpoints;
+export type MeiroEndpointType = 'mobileApp' | 'website';
 
 export const defaultMeiroEndpointType: MeiroEndpointType = 'mobileApp';

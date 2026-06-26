@@ -1,5 +1,5 @@
 import { Copy, Download, RadioTower, RotateCcw, Search, ShieldAlert, UserCheck } from 'lucide-react';
-import { meiroEndpoints, meiroProfileApi } from '../lib/meiroConfig';
+import { meiroCollectProxyPath, meiroProfileApi } from '../lib/meiroConfig';
 import type { MeiroProfile, TrackingMode } from '../lib/types';
 
 export function PresenterControls({
@@ -64,7 +64,7 @@ export function PresenterControls({
           className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold ${
             trackingMode === 'live' ? 'border-mint/40 bg-mint/10 text-mint' : 'border-white/10 bg-white/5 text-slate-100'
           }`}
-          title={meiroEndpoints.mobileApp}
+          title={meiroCollectProxyPath}
         >
           <RadioTower size={14} /> {trackingMode === 'live' ? 'Live Meiro' : 'Demo only'}
         </button>
@@ -88,7 +88,7 @@ export function PresenterControls({
         ))}
       </div>
       <p className="mt-3 text-[11px] text-slate-500">
-        {trackingMode === 'live' ? `Sending mobile-app events to ${meiroEndpoints.mobileApp}` : 'Local demo mode. Switch on Live Meiro only when ready to send events.'}
+        {trackingMode === 'live' ? `Sending mobile-app events through ${meiroCollectProxyPath}` : 'Local demo mode. Switch on Live Meiro only when ready to send events.'}
       </p>
       <p className="mt-1 text-[11px] text-slate-500">
         Profile API proxy: {meiroProfileApi.proxyPath} · mobile_user_id={profile.mobile_user_id} · {profileApiStatus}
