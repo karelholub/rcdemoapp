@@ -1,0 +1,42 @@
+import type { ScreenId } from './types';
+
+export const screenOrder: ScreenId[] = [
+  'welcome',
+  'account-status',
+  'onboarding-path',
+  'identity',
+  'verification',
+  'privacy',
+  'consent',
+  'personal',
+  'employment',
+  'investment',
+  'wallet',
+  'account-details',
+  'review',
+  'password',
+  'otp',
+  'submitted',
+  'created',
+];
+
+export const screenTitles: Record<ScreenId, string> = {
+  welcome: 'Welcome',
+  'account-status': 'Account status',
+  login: 'Secure sign in',
+  'onboarding-path': 'Onboarding path',
+  identity: 'Identity',
+  verification: 'Verification',
+  privacy: 'Privacy',
+  consent: 'Consent',
+  personal: 'Personal',
+  employment: 'Employment',
+  investment: 'Investment',
+  wallet: 'Wallet',
+  'account-details': 'Details',
+  review: 'Review',
+  password: 'Password',
+  otp: 'Code',
+  submitted: 'Submitted',
+  created: 'Ready',
+};
