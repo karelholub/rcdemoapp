@@ -19,6 +19,10 @@ const allowedMobileEvents = new Set([
   'app_session_ended',
   'app_opened',
   'registration_started',
+  'form_step_started',
+  'form_step_completed',
+  'screen_viewed',
+  'form_completed',
   'kyc_submitted',
   'kyc_rejected',
   'registration_completed',
@@ -85,9 +89,10 @@ function getMobileCollectorEventType(event: DemoEvent): string | null {
   if (event.event_type === 'channel_consent_updated' && 'marketing_consent_whatsapp' in event.payload) return 'whatsapp_consent_updated';
   if (event.event_type === 'channel_consent_updated' && event.payload.marketing_consent_push === true) return 'push_permission_granted';
   if (event.event_type === 'channel_consent_updated' && event.payload.marketing_consent_push === false) return 'push_permission_denied';
-  if (event.event_type === 'form_step_started' && formName === 'investment_profile') return 'risk_profile_started';
-  if (event.event_type === 'form_completed' && formName === 'investment_profile') return 'risk_profile_completed';
-  if (event.event_type === 'form_completed' && formName === 'employment_information') return 'suitability_assessment_completed';
+  if (event.event_type === 'form_step_started') return 'form_step_started';
+  if (event.event_type === 'form_step_completed') return 'form_step_completed';
+  if (event.event_type === 'form_completed') return 'form_completed';
+  if (event.event_type === 'screen_viewed') return 'screen_viewed';
   if (event.event_type === 'password_created') return 'registration_completed';
 
   return mapped[event.event_type] ?? null;
