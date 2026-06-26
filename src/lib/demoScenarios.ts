@@ -4,11 +4,11 @@ import type { DemoState, ScreenId } from './types';
 export type ScenarioId = 'early' | 'verification-failure' | 'form' | 'review' | 'completed';
 
 export const scenarioNotes: Record<ScenarioId, string> = {
-  early: 'A high-intent visitor starts onboarding and leaves before verification. Meiro recognizes onboarding intent, saves progress, and suppresses generic acquisition.',
-  'verification-failure': 'The customer fails verification twice. Meiro shifts from marketing recovery to secure support intervention.',
-  form: 'The customer has passed identity and consent but stops during the form journey. Meiro preserves next step and channel eligibility.',
-  review: 'This user is not a cold prospect anymore. They are 90% through onboarding, so Meiro suppresses acquisition and activates only consented channels.',
-  completed: 'The application is submitted and account creation completes. Recovery journeys stop and the welcome journey starts.',
+  early: 'Intent is known after the first step. Generic acquisition is suppressed and recovery can use consented channels.',
+  'verification-failure': 'Two failed checks move the next action from marketing recovery to secure support.',
+  form: 'Identity and consent are complete. Meiro keeps the next form step and channel eligibility current.',
+  review: 'At 90% completion, Meiro treats the user as high intent, suppresses acquisition, and activates only consented channels.',
+  completed: 'Once the account is created, recovery stops and the welcome journey takes over.',
 };
 
 export function runScenario(initial: DemoState, scenario: ScenarioId): { state: DemoState; screen: ScreenId } {

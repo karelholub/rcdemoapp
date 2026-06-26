@@ -3,6 +3,11 @@ import type { DemoEvent, MeiroProfile } from './types';
 export const createInitialProfile = (): MeiroProfile => ({
   anonymous_id: 'demo_visitor_001',
   known_customer_id: null,
+  browser: 'meiro_riyc_000918',
+  crm_customer_id: 'RC-CUST-100918',
+  device_id: 'android_device_2swi0nt678',
+  mobile_user_id: 'app_user_yjtk0w371nvx',
+  user_id: 'meiro_riyc_000918',
   customer_lifecycle_stage: 'anonymous_prospect',
   investment_onboarding_status: 'not_started',
   investment_onboarding_started_at: null,

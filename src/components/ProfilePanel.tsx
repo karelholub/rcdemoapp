@@ -8,6 +8,10 @@ const label = (key: string) => key.replace(/_/g, ' ').replace(/\b\w/g, (letter: 
 
 export function ProfilePanel({ profile, audiences }: { profile: MeiroProfile; audiences: string[] }) {
   const rows = [
+    ['Browser ID', profile.browser],
+    ['CRM customer ID', profile.crm_customer_id],
+    ['Mobile user ID', profile.mobile_user_id],
+    ['Device ID', profile.device_id],
     ['Lifecycle stage', profile.customer_lifecycle_stage],
     ['Onboarding status', profile.investment_onboarding_status],
     ['Last completed step', profile.investment_onboarding_last_completed_step],

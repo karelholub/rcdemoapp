@@ -9,6 +9,10 @@ export const meiroProfileApi = {
   proxyPath: '/api/meiro-profile',
 } as const;
 
+export const meiroIdentifierTypes = ['email', 'phone', 'crm_customer_id', 'user_id', 'mobile_user_id'] as const;
+
+export type MeiroIdentifierType = (typeof meiroIdentifierTypes)[number];
+
 export type MeiroEndpointType = keyof typeof meiroEndpoints;
 
 export const defaultMeiroEndpointType: MeiroEndpointType = 'mobileApp';

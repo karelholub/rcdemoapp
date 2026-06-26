@@ -105,7 +105,7 @@ function App() {
     setProfileApiStatus('Fetching...');
     try {
       const result = await fetchMeiroProfile(state.profile);
-      setProfileApiStatus(result.ok ? `Fetched profile (${result.status})` : `Profile API returned ${result.status}`);
+      setProfileApiStatus(result.ok ? `Client lookup returned ${result.status}` : `Client lookup returned ${result.status}`);
     } catch {
       setProfileApiStatus('Unavailable in plain Vite dev; use Netlify Dev or deploy with MEIRO_PROFILE_API_KEY.');
     }

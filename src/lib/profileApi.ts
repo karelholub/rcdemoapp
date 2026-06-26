@@ -1,4 +1,4 @@
-import { meiroProfileApi } from './meiroConfig';
+import { meiroProfileApi, type MeiroIdentifierType } from './meiroConfig';
 import type { MeiroProfile } from './types';
 
 export type ProfileApiResult = {
@@ -7,15 +7,24 @@ export type ProfileApiResult = {
   data: unknown;
 };
 
-export async function fetchMeiroProfile(profile: MeiroProfile): Promise<ProfileApiResult> {
-  const response = await fetch(meiroProfileApi.proxyPath, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      anonymous_id: profile.anonymous_id,
-      user_id: profile.known_customer_id,
-      journey_name: 'investment_account_opening',
-    }),
+export function getDefaultProfileIdentifier(profile: MeiroProfile): { identifierType: MeiroIdentifierType; identifierValue: string } {
+  return {
+    identifierType: 'mobile_user_id',
+    identifierValue: profile.mobile_user_id,
+  };
+}
+
+export async function fetchMeiroProfile(
+  profile: MeiroProfile,
+  identifier = getDefaultProfileIdentifier(profile),
+): Promise<ProfileApiResult> {
+  const params = new URLSearchParams({
+    identifier_type: identifier.identifierType,
+    identifier_value: identifier.identifierValue,
+  });
+
+  const response = await fetch(`${meiroProfileApi.proxyPath}?${params.toString()}`, {
+    method: 'GET',
   });
 
   const contentType = response.headers.get('Content-Type') ?? '';

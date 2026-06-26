@@ -35,6 +35,11 @@ export type DemoEvent = {
 export type MeiroProfile = {
   anonymous_id: string;
   known_customer_id: string | null;
+  browser: string;
+  crm_customer_id: string;
+  device_id: string;
+  mobile_user_id: string;
+  user_id: string;
   customer_lifecycle_stage: 'anonymous_prospect' | 'known_prospect' | 'applicant' | 'active_customer' | 'existing_customer';
   investment_onboarding_status: 'not_started' | 'started' | 'in_progress' | 'submitted' | 'completed' | 'abandoned';
   investment_onboarding_started_at: string | null;

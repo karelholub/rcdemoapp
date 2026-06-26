@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeCheck, BriefcaseBusiness, Check, ChevronLeft, CircleDollarSign, Fingerprint, KeyRound, LockKeyhole, MessageSquareWarning, Shield, Sparkles, UserRound } from 'lucide-react';
+import { ArrowRight, BadgeCheck, BriefcaseBusiness, Check, ChevronLeft, CircleDollarSign, Fingerprint, KeyRound, LockKeyhole, MessageSquareWarning, Shield, UserRound } from 'lucide-react';
 import type { MeiroProfile, ScreenId } from '../lib/types';
 import { ProgressBar } from '../components/ProgressBar';
 
@@ -22,10 +22,10 @@ type ScreenConfig = {
 
 const configs: Record<ScreenId, ScreenConfig> = {
   welcome: {
-    eyebrow: 'Premium digital investing',
+    eyebrow: 'Investment account',
     title: 'Welcome to Aurum Capital',
-    copy: 'Open your investment account securely in just a few steps.',
-    icon: Sparkles,
+    copy: 'Open an investment account with secure identity checks and saved progress.',
+    icon: Shield,
     actions: [
       { label: 'Open investment account', event: 'account_opening_started', next: 'account-status' },
       { label: 'I already have an account', event: 'login_started', next: 'login', variant: 'secondary' },
@@ -45,7 +45,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   login: {
     eyebrow: 'Secure access',
     title: 'Sign in to Aurum Capital',
-    copy: 'Demo login can complete or fail to show customer state changes.',
+    copy: 'Existing customers sign in here. Demo controls can complete or fail the attempt.',
     icon: LockKeyhole,
     fields: ['Username', 'Password'],
     actions: [
@@ -56,7 +56,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   'onboarding-path': {
     eyebrow: 'Journey setup',
     title: 'Choose how to continue',
-    copy: 'We will tailor verification and account setup to your relationship with us.',
+    copy: 'Select the path that matches the customer relationship.',
     icon: Shield,
     cards: ['Continue as existing bank customer', 'Continue as new customer'],
     actions: [
@@ -67,7 +67,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   identity: {
     eyebrow: 'Identity',
     title: 'Verify your identity',
-    copy: 'Enter your customer identifier. Sensitive values are never displayed in the CDP panel.',
+    copy: 'Enter a customer identifier. The demo records completion state, not raw ID values.',
     icon: Fingerprint,
     fields: ['National ID / Customer ID'],
     actions: [{ label: 'Continue securely', event: 'identity_number_submitted', next: 'verification', payload: { identity_step_completed: true } }],
@@ -93,7 +93,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   consent: {
     eyebrow: 'Consent',
     title: 'Consent to use information',
-    copy: 'Choose which service channels can help you complete this application.',
+    copy: 'Set processing and channel consent before continuing.',
     icon: Check,
     cards: ['Application processing consent', 'Push consent', 'Email consent', 'WhatsApp consent'],
     actions: [{ label: 'Continue', event: 'personal_info_consent_given', next: 'personal', payload: { personal_info_consent: true } }],
@@ -101,7 +101,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   personal: {
     eyebrow: 'Form step',
     title: 'Personal information',
-    copy: 'We only send completion signals to Meiro, not raw sensitive form values.',
+    copy: 'The CDP receives step completion, not sensitive form values.',
     icon: UserRound,
     fields: ['Full name', 'Date of birth', 'Nationality', 'Contact details'],
     actions: [{ label: 'Continue', event: 'form_completed', next: 'employment', payload: { form_name: 'personal_information' } }],
@@ -109,7 +109,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   employment: {
     eyebrow: 'Form step',
     title: 'Employment information',
-    copy: 'Safe categories help complete eligibility checks without exposing unnecessary detail.',
+    copy: 'Use broad categories only for this demo.',
     icon: BriefcaseBusiness,
     fields: ['Employment status', 'Industry', 'Income range'],
     actions: [{ label: 'Continue', event: 'form_completed', next: 'investment', payload: { form_name: 'employment_information' } }],
@@ -117,7 +117,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   investment: {
     eyebrow: 'Investor profile',
     title: 'Investment profile',
-    copy: 'Tell us about your experience and comfort level using general, fictional categories.',
+    copy: 'Capture goal, experience, and risk comfort as safe categories.',
     icon: CircleDollarSign,
     fields: ['Investment experience', 'Investment goal', 'Risk comfort level', 'Expected investment range'],
     actions: [{ label: 'Continue', event: 'form_completed', next: 'wallet', payload: { form_name: 'investment_profile' } }],
@@ -125,7 +125,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   wallet: {
     eyebrow: 'Account setup',
     title: 'Choose your investment setup',
-    copy: 'Select the wallet experience you want to start with.',
+    copy: 'Select the starting investment setup.',
     icon: CircleDollarSign,
     cards: ['Local investments', 'Global investments', 'Balanced portfolio'],
     actions: [{ label: 'Continue with balanced portfolio', event: 'wallet_type_selected', next: 'account-details', payload: { wallet_type: 'Balanced portfolio' } }],
@@ -133,7 +133,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
   'account-details': {
     eyebrow: 'Account details',
     title: 'Account details',
-    copy: 'Set service preferences for your application.',
+    copy: 'Confirm funding, currency, and statement preferences.',
     icon: KeyRound,
     fields: ['Funding account', 'Preferred currency', 'Statement preference'],
     actions: [{ label: 'Continue', event: 'account_details_submitted', next: 'review', payload: { preferred_currency: 'USD', statement_preference: 'digital' } }],
@@ -183,7 +183,7 @@ const configs: Record<ScreenId, ScreenConfig> = {
     eyebrow: 'Account ready',
     title: 'Your account is ready',
     copy: 'Welcome to Aurum Capital. You can now fund your wallet and explore investment options.',
-    icon: Sparkles,
+    icon: BadgeCheck,
     actions: [{ label: 'Explore Aurum', event: 'screen_viewed', variant: 'secondary' }],
   },
 };
@@ -212,14 +212,14 @@ export function OnboardingScreen({
         <span className="text-xs font-medium text-slate-400">{profile.investment_onboarding_completion_percentage}%</span>
       </div>
       <ProgressBar value={profile.investment_onboarding_completion_percentage} />
-      <div className="mt-8 rounded-3xl border border-aurum/20 bg-gradient-to-br from-aurum/20 via-white/[0.06] to-mint/10 p-5 shadow-glow">
+      <div className="mt-8 rounded-2xl border border-white/12 bg-white/[0.055] p-5 shadow-cyan">
         <div className="mb-10 flex items-center justify-between">
-          <div className="rounded-2xl border border-white/15 bg-black/20 p-3 text-aurum">
+          <div className="rounded-xl border border-white/15 bg-black/20 p-3 text-aurum">
             <Icon size={26} />
           </div>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-slate-300">Aurum Secure</span>
+          <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-[11px] text-slate-300">Secure flow</span>
         </div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-aurum">{config.eyebrow}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-aurum">{config.eyebrow}</p>
         <h2 className="mt-3 text-3xl font-semibold leading-tight text-white">{config.title}</h2>
         <p className="mt-3 text-sm leading-6 text-slate-300">{config.copy}</p>
       </div>
