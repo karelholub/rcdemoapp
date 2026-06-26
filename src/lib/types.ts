@@ -26,6 +26,10 @@ export type DemoEvent = {
   anonymous_id: string;
   session_id: string;
   user_id?: string | null;
+  browser?: string;
+  crm_customer_id?: string;
+  device_id?: string;
+  mobile_user_id?: string;
   journey_name: 'investment_account_opening';
   screen_name: string;
   payload: Record<string, unknown>;
