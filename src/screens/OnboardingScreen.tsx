@@ -1,4 +1,26 @@
-import { ArrowRight, BadgeCheck, BriefcaseBusiness, Check, ChevronLeft, CircleDollarSign, Fingerprint, KeyRound, LockKeyhole, MessageSquareWarning, Shield, UserRound } from 'lucide-react';
+import {
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  Bell,
+  BriefcaseBusiness,
+  Check,
+  ChevronLeft,
+  CircleDollarSign,
+  Fingerprint,
+  Home,
+  KeyRound,
+  Landmark,
+  LockKeyhole,
+  MessageSquareWarning,
+  MoreHorizontal,
+  PieChart,
+  RefreshCw,
+  Shield,
+  Star,
+  UserRound,
+  WalletCards,
+} from 'lucide-react';
 import type { MeiroProfile, ScreenId } from '../lib/types';
 import { ProgressBar } from '../components/ProgressBar';
 
@@ -204,58 +226,151 @@ export function OnboardingScreen({
   const primary = config.actions[0];
 
   return (
-    <div className="flex min-h-[720px] flex-col px-5 pb-6 pt-5">
-      <div className="mb-4 flex items-center justify-between">
-        <button onClick={onBack} className="rounded-full border border-white/10 bg-white/5 p-2 text-slate-300">
-          <ChevronLeft size={17} />
-        </button>
-        <span className="text-xs font-medium text-slate-400">{profile.investment_onboarding_completion_percentage}%</span>
-      </div>
-      <ProgressBar value={profile.investment_onboarding_completion_percentage} />
-      <div className="mt-8 rounded-2xl border border-white/12 bg-white/[0.055] p-5 shadow-cyan">
-        <div className="mb-10 flex items-center justify-between">
-          <div className="rounded-xl border border-white/15 bg-black/20 p-3 text-aurum">
-            <Icon size={26} />
-          </div>
-          <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-[11px] text-slate-300">Secure flow</span>
-        </div>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-aurum">{config.eyebrow}</p>
-        <h2 className="mt-3 text-3xl font-semibold leading-tight text-white">{config.title}</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-300">{config.copy}</p>
-      </div>
-
-      <div className="mt-5 flex-1 space-y-3">
-        {config.fields?.map((field) => (
-          <div key={field} className="rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3">
-            <div className="text-[11px] uppercase tracking-wide text-slate-500">{field}</div>
-            <div className="mt-2 h-5 rounded bg-white/5" />
-          </div>
-        ))}
-        {config.cards?.map((card) => (
-          <div key={card} className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.045] px-4 py-3 text-sm text-slate-100">
-            <span>{card}</span>
-            <Check size={15} className="text-mint" />
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-5 space-y-2">
-        {config.actions.map((action) => (
-          <button
-            key={action.label}
-            onClick={() => onAction(action)}
-            className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold ${
-              action.variant === 'danger'
-                ? 'border border-rose-300/25 bg-rose-300/10 text-rose-100'
-                : action.variant === 'secondary'
-                  ? 'border border-white/10 bg-white/5 text-slate-100'
-                  : 'bg-aurum text-graphite shadow-glow'
-            }`}
-          >
-            {action.label}
-            {action === primary ? <ArrowRight size={16} /> : null}
+    <div className="flex min-h-[720px] flex-col bg-[#f7f8fb] text-[#23104f]">
+      <div className="bg-gradient-to-br from-[#36117f] via-[#28106d] to-[#1d0b58] px-5 pb-14 pt-4 text-white">
+        <div className="mb-4 flex items-center justify-between">
+          <button onClick={onBack} className="rounded-full border border-white/15 bg-white/10 p-2 text-white">
+            <ChevronLeft size={17} />
           </button>
-        ))}
+          <div className="flex items-center gap-2 text-[11px] font-medium">
+            <span className="rounded-full bg-white/15 px-2 py-1">Open</span>
+            <span>TASI 7,942.43</span>
+          </div>
+          <button className="rounded-full border border-white/15 bg-white/10 p-2 text-white">
+            <Bell size={15} />
+          </button>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#13b8aa] text-sm font-bold">A</div>
+          <div>
+            <p className="text-[11px] text-white/70">Good Morning, Ahmad</p>
+            <h2 className="text-base font-semibold">Aurum Capital</h2>
+          </div>
+        </div>
+      </div>
+
+      <div className="-mt-10 flex flex-1 flex-col px-5 pb-4">
+        <div className="rounded-lg bg-white p-4 shadow-xl shadow-[#23104f]/15">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-[11px] font-medium text-slate-500">Total balance</p>
+              <div className="mt-1 flex items-end gap-1">
+                <span className="text-2xl font-semibold tracking-tight text-[#1f1740]">100,000.00</span>
+                <span className="pb-1 text-[10px] font-semibold text-slate-500">SAR</span>
+              </div>
+            </div>
+            <div className="rounded-full bg-[#e8f8f5] px-2.5 py-1 text-[11px] font-semibold text-[#0b9f91]">{profile.investment_onboarding_completion_percentage}%</div>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+            {[
+              ['Profit', '+1,000.00', '+1.00%'],
+              ['G/L', '+2.75%', '+2.10%'],
+              ['Net Worth', '98,000.00', 'SAR'],
+            ].map(([label, value, meta]) => (
+              <div key={label} className="rounded-lg bg-[#f6f8fb] px-2 py-2">
+                <p className="text-[10px] text-slate-500">{label}</p>
+                <p className="mt-1 text-xs font-semibold text-[#08a992]">{value}</p>
+                <p className="text-[9px] text-slate-400">{meta}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+            <ProgressBar value={profile.investment_onboarding_completion_percentage} />
+          </div>
+        </div>
+
+        <div className="mt-4 rounded-lg bg-white p-4 shadow-sm shadow-[#23104f]/10">
+          <div className="mb-5 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-[#efeafb] p-3 text-[#34127a]">
+                <Icon size={24} />
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#08a992]">{config.eyebrow}</p>
+                <h2 className="text-xl font-semibold leading-tight text-[#1f1740]">{config.title}</h2>
+              </div>
+            </div>
+            <span className="rounded-full border border-[#e6e1ef] px-2.5 py-1 text-[10px] font-semibold text-[#34127a]">Secure</span>
+          </div>
+          <p className="text-sm leading-6 text-slate-600">{config.copy}</p>
+
+          <div className="mt-5 space-y-2">
+            {config.fields?.map((field) => (
+              <div key={field} className="rounded-lg border border-[#edf0f4] bg-[#f7f8fb] px-4 py-3">
+                <div className="text-[10px] font-semibold uppercase tracking-wide text-slate-400">{field}</div>
+                <div className="mt-2 h-5 rounded bg-white" />
+              </div>
+            ))}
+            {config.cards?.map((card, index) => (
+              <div key={card} className="flex items-center justify-between rounded-lg border border-[#edf0f4] bg-[#f7f8fb] px-4 py-3 text-sm text-[#241546]">
+                <span className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#e8f8f5] text-[10px] font-semibold text-[#08a992]">{index + 1}</span>
+                  {card}
+                </span>
+                <Check size={15} className="text-[#08a992]" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          {[
+            ['Cash', '25,000.00', WalletCards],
+            ['Stocks', '25,000.00', BarChart3],
+            ['Funds', '50,000.00', Landmark],
+          ].map(([label, value, CardIcon]) => {
+            const TypedIcon = CardIcon as typeof WalletCards;
+            const labelText = String(label);
+            const valueText = String(value);
+            return (
+              <div key={labelText} className="rounded-lg bg-gradient-to-br from-[#4e35a0] to-[#8cb7e8] p-3 text-white">
+                <TypedIcon size={17} />
+                <p className="mt-2 text-[11px] font-semibold">{labelText}</p>
+                <p className="mt-1 text-[10px] text-white/80">{valueText} SAR</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-auto space-y-2 pt-4">
+          {config.actions.map((action) => (
+            <button
+              key={action.label}
+              onClick={() => onAction(action)}
+              className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold ${
+                action.variant === 'danger'
+                  ? 'border border-red-100 bg-red-50 text-red-600'
+                  : action.variant === 'secondary'
+                    ? 'border border-[#ddd7eb] bg-white text-[#34127a]'
+                    : 'bg-[#10b8aa] text-white shadow-lg shadow-[#10b8aa]/25'
+              }`}
+            >
+              {action.label}
+              {action === primary ? <ArrowRight size={16} /> : null}
+            </button>
+          ))}
+        </div>
+
+        <nav className="mt-4 grid grid-cols-5 items-center rounded-lg bg-white px-2 py-2 text-[10px] font-medium text-slate-400 shadow-sm">
+          {[
+            ['Portfolio', Home],
+            ['Markets', PieChart],
+            ['Trade', RefreshCw],
+            ['Watchlist', Star],
+            ['More', MoreHorizontal],
+          ].map(([label, NavIcon]) => {
+            const TypedIcon = NavIcon as typeof Home;
+            const active = label === 'Trade';
+            return (
+              <div key={label as string} className={`flex flex-col items-center gap-1 ${active ? 'text-[#34127a]' : ''}`}>
+                <span className={active ? 'rounded-full bg-[#34127a] p-2 text-white' : 'p-2'}>
+                  <TypedIcon size={15} />
+                </span>
+                {label as string}
+              </div>
+            );
+          })}
+        </nav>
       </div>
     </div>
   );
